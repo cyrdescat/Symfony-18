@@ -32,10 +32,10 @@ class WildController extends AbstractController
     /**
      * @param string $category
      * @return Response
-     * @Route("/showByCategory/{categoryName}",
+     * @Route("/category/{categoryName}",
      *     requirements={"categoryName"="[a-z1-9\-\/]+"},
      *     methods={"GET"},
-     *     name="show_by_category")
+     *     name="category")
      */
     public function showByCategory(string $categoryName) : Response
     {
@@ -64,7 +64,7 @@ class WildController extends AbstractController
             );
         }
 
-        return $this->render('wild/showByCategory.html.twig', [
+        return $this->render('wild/category.html.twig', [
             'programs' => $programs,
             'title' => 'horror',
         ]);
