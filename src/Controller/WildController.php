@@ -35,7 +35,7 @@ class WildController extends AbstractController
      * @Route("/category/{categoryName}",
      *     requirements={"categoryName"="[a-z1-9\-\/]+"},
      *     methods={"GET"},
-     *     name="category")
+     *     name="show_category")
      */
     public function showByCategory(string $categoryName) : Response
     {
