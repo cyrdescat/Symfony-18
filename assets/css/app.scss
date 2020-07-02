@@ -1,4 +1,4 @@
-@import "~bootstrap/scss/bootstrap";
+
 
 body {
     background-color: white;
@@ -8,3 +8,5 @@ $theme-colors: (
     "primary": 	#FF8C00,
     "secondary": #696969
 );
+
+@import "~bootstrap/scss/bootstrap";
