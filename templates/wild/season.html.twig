@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ programNewName }} saison {{ seasonNumber }}{% endblock %}
+
+{% block body %}
+
+    <div>
+        <div class="jumbotron">
+            <h1>Saison {{ seasonNumber }} de {{ programNewName }}</h1>
+            <hr>
+            <span>{{ season.description }}</span>
+            <hr>
+            <h5>Liste des épisodes :</h5>
+            {% for episode in episodes %}
+                <p>Épisode {{ episode.number }} : {{ episode.title }}</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <br>
+    <a href="{{ path('app_index') }}">
+        Retour à l'accueil
+    </a>
+
+{% endblock %}

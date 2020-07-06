@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Program;
+use App\Entity\Season;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -67,6 +68,69 @@ class WildController extends AbstractController
         return $this->render('wild/category.html.twig', [
             'programs' => $programs,
             'categoryName' => $categoryName,
+        ]);
+    }
+
+    /**
+     * @Route("/program/{programName}/{seasonNumber}",
+     *     requirements={"seasonNumber"="[1-9]+", "programName"="[a-z1-9\-\/]+"},
+     *     methods={"GET"},
+     *     name="program_season")
+     */
+    public function showBySeason(string $programName, int $seasonNumber) : Response
+    {
+        $programNewName = ucwords(str_replace("-", " ", $programName));
+
+        $program = $this->getDoctrine()
+            ->getRepository(Program::class)
+            ->findOneBy(['title' => $programNewName]);
+
+        $season = $this->getDoctrine()
+            ->getRepository(Season::class)
+            ->findOneBy(['number' => $seasonNumber, 'program' => $program]);
+
+        if (!$season) {
+            throw $this->createNotFoundException(
+                "Season $seasonNumber of $programNewName not found"
+            );
+        }
+
+        $episodes = $season->getEpisodes();
+
+        return $this->render("wild/season.html.twig", [
+            'seasonNumber' => $seasonNumber,
+            'episodes' => $episodes,
+            'season' => $season,
+            'programNewName' => $programNewName
+        ]);
+    }
+
+    /**
+     * @Route("/program/{programName}",
+     *     requirements={"programName"="[a-z1-9\-\/]+"},
+     *     methods={"GET"},
+     *     name="program")
+     */
+    public function showByProgram(string $programName) : Response
+    {
+        $programNewName = ucwords(str_replace("-", " ", $programName));
+
+        $program = $this->getDoctrine()
+            ->getRepository(Program::class)
+            ->findOneBy(['title' => $programNewName]);
+
+        if (!$program) {
+            throw $this->createNotFoundException(
+                "Program $programNewName not found"
+            );
+        }
+
+        $seasons = $program->getSeasons();
+
+        return $this->render("wild/program.html.twig", [
+            'seasons' => $seasons,
+            'programNewName' => $programNewName,
+            'programName' => $programName
         ]);
     }
 

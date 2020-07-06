@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ programNewName }}{% endblock %}
+
+{% block body %}
+
+    <ul class="list-group list-group-flush">
+        {% for season in seasons %}
+            <li class="list-group-item">
+                <a href="{{ path('wild_program_season', {'programName':programName, 'seasonNumber':season.number}) }}">Saison {{ season.number }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('app_index') }}">
+        Retour à l'accueil
+    </a>
+
+{% endblock %}
