@@ -9,6 +9,10 @@
             <h2>Episode {{ episode.number }} de la saison {{ season.number }} de {{ program.title }}</h2>
             <hr>
             <span>{{ episode.synopsis }}</span>
+            <hr>
+            <a href="{{ path('wild_program_season', {'programName':programName, 'seasonNumber':season.number}) }}">Voir la saison</a>
+            <br>
+            <a href="{{ path('wild_program', {'programName':programName}) }}">Voir le programme</a>
         </div>
     </div>
 
