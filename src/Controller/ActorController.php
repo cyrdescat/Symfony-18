@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class ActorController
  * @package App\Controller
- * @Route("/actor") name=("actor_")
+ * @Route("/actor", name="actor_")
  */
 class ActorController extends AbstractController
 {
