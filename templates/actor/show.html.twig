@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ actor.name }}{% endblock %}
+
+{% block body %}
+
+    <strong>{{ actor.name }} a joué dans :</strong>
+    <ul>
+        {% for program in actor.programs %}
+            <li>{{ program.title }} </li>
+        {% else %}
+            <li>Aucun acteur pour cette série</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('app_index') }}">back to frontpage</a>
+{% endblock %}
